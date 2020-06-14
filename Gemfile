@@ -13,6 +13,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
 gem 'sqlite3', '~> 1.4'
 
 group :development, :test do
+  gem 'faker'
   gem 'byebug', platforms: %I[mri mingw x64_mingw]
 end
 
