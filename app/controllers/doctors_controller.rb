@@ -1,5 +1,6 @@
 class DoctorsController < ApplicationController
-  skip_before_action :authorized
+  skip_before_action :authorized, only: [:appointments]
+  before_action :set_doctor, only: [:appointments]
 
   def index
     @doctors = Doctor.all
@@ -14,14 +15,25 @@ class DoctorsController < ApplicationController
         message: 'Doctor created successfully'
       }
     else
-      render json: {
+      json_response({
         error: "Failed to add doctor",
-        messages: @doctor.errors.messages
-      }
+        messages: @doctor.errors
+      }, :unprocessable_entity)
     end
   end
 
+  def appointments
+    json_response({
+      data: @doctor.as_json(include: 'appointments')
+    })
+  end
+
+
   private
+
+  def set_doctor
+    @doctor = Doctor.find(params[:id])
+  end
 
   def doctor_params
     params.permit(:name, :start_time, :end_time, :hospital_id)

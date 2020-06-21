@@ -5,7 +5,6 @@ class HospitalsController < ApplicationController
   def index
     @hospitals = Hospital.all
     
-    #TODO: fixme
     json_response({
       data: @hospitals.as_json(include: 'doctors')
     })

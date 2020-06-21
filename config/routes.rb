@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   end
   resources :appointments, only: [:create]
 
-  resources :doctors
+  resources :doctors do
+    get 'appointments', on: :member
+  end
   resources :hospitals
 
   post '/login', to: "users#login"

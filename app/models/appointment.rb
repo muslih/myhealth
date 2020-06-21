@@ -1,5 +1,5 @@
 class Appointment < ApplicationRecord
-  LIMIT_USER = 3
+  LIMIT_USER = 10 
 
   belongs_to :user
   belongs_to :doctor

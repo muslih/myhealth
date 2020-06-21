@@ -10,6 +10,7 @@ class AppointmentsController < ApplicationController
   end
 
   private
+
   def appointment_params
     params.require(:appointment).permit(:user_id, :doctor_id, :book_time)
   end
