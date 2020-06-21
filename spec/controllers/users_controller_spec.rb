@@ -13,10 +13,9 @@ RSpec.describe UsersController, type: :controller do
 
         it 'should not returns error message' do
           post "/login", params: valid_params
-          byebug
 
-          expect(response).to have_http_status(:success)
-          expect(JSON.parse(response.body)['user']).to eq(user.as_json)
+          expect(response.status).to eq(200)
+          expect(JSON.parse(response.body)['data']).to eq(user.as_json)
           expect(JSON.parse(response.body)['token']).to_not eq(nil)
           expect(JSON.parse(response.body)['error']).to eq(nil)
         end
@@ -31,7 +30,7 @@ RSpec.describe UsersController, type: :controller do
         it 'returns error message' do
           post "/login", params: invalid_params
 
-          expect(response).to have_http_status(:success)
+          expect(response.status).to eq(401)
           expect(JSON.parse(response.body)['user']).to eq(nil)
           expect(JSON.parse(response.body)['token']).to eq(nil)
           expect(JSON.parse(response.body)['error']).to_not eq(nil)
