@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :doctors, only: [:index, :create] do
     get 'appointments', on: :member
   end
-  resources :hospitals, only: [:show]
+  resources :hospitals, only: [:index]
 
   post '/login', to: "users#login"
 end
