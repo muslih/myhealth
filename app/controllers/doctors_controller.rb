@@ -1,10 +1,10 @@
 class DoctorsController < ApplicationController
-  skip_before_action :authorized, only: [:appointments]
+  skip_before_action :authorized, only: [:index, :appointments]
   before_action :set_doctor, only: [:appointments]
 
   def index
     @doctors = Doctor.all
-    json_response(@doctors)
+    json_response({data: @doctors})
   end
 
   def create

@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   end
   resources :appointments, only: [:create]
 
-  resources :doctors do
+  resources :doctors, only: [:index, :create] do
     get 'appointments', on: :member
   end
-  resources :hospitals
+  resources :hospitals, only: [:show]
 
   post '/login', to: "users#login"
 end

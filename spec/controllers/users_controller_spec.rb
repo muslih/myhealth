@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  describe 'Items API', type: :request do
+  describe 'Users API', type: :request do
     let!(:user) { User.create username: "test",name: "testing", email: "test@test.com", password: "12345", password_confirmation: "12345" }
 
     describe 'POST /login' do
