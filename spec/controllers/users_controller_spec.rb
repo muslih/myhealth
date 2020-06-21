@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   describe 'Items API', type: :request do
-
     let!(:user) { User.create username: "test",name: "testing", email: "test@test.com", password: "12345", password_confirmation: "12345" }
 
     describe 'POST /login' do
@@ -12,8 +11,9 @@ RSpec.describe UsersController, type: :controller do
           password: "12345"
         }
 
-        it 'returns error message' do
+        it 'should not returns error message' do
           post "/login", params: valid_params
+          byebug
 
           expect(response).to have_http_status(:success)
           expect(JSON.parse(response.body)['user']).to eq(user.as_json)

@@ -1,17 +1,19 @@
 class UsersController < ApplicationController
-  # before_action :authorized, only: [:auto_login]
-  skip_before_action :authorized,
-  # REGISTER
+  # skip_before_action :verify_authenticity_token
+  skip_before_action :authorized
+
   def create
-    @user = User.create(user_params)
-    if @user.valid?
+    @user = User.new(user_params)
+    if @user.save
       token = encode_token({ user_id: @user.id })
+
       json_response({
         data: @user,
         token: token
       })
     else
       render json: {error: "Signup: Invalid email or password"}
+
       json_response({
         error: "Signup failed!",
         messages: @user.errors
@@ -19,7 +21,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # LOGGING IN
   def login
     @user = User.find_by(email: params[:email])
 
